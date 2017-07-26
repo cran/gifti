@@ -7,9 +7,11 @@
 #' @export
 #' @importFrom xml2 xml_find_all read_xml xml_attr as_list
 #' @importFrom xml2 xml_children xml_text xml_name
+#' @importFrom R.utils gunzip
+#' @importFrom tools file_ext
 #' @examples
-#' if (have_gifti_test_data()) {
-#'    gii_files = download_gifti_data()
+#' if (have_gifti_test_data(outdir = NULL)) {
+#'    gii_files = download_gifti_data(outdir = NULL)
 #'    gii_list = lapply(gii_files, readgii)
 #'    surf_files = grep("white[.]surf[.]gii", gii_files, value = TRUE)
 #'    surfs = lapply(surf_files, surf_triangles)
@@ -25,17 +27,29 @@
 #'     stopifnot(!any(is.na(ints)))
 #'     cols = mypal(n)[ints]
 #'     cols = cols[surfs[[1]]$triangle]
+#' }
+#' \dontrun{
+#' if (have_gifti_test_data(outdir = NULL)) {
 #'
 #'  if (requireNamespace("rgl", quietly = TRUE)) {
 #'     rgl::rgl.open()
 #'     rgl::rgl.triangles(surfs[[1]]$pointset, color = cols)
-#'     play3d(spin3d(), duration = 5)
+#'     rgl::play3d(rgl::spin3d(), duration = 5)
 #'  }
+#' }
 #' }
 #'
 readgii = function(file){
 
+  if (length(file) > 1) {
+    res = lapply(file, readgii)
+    return(res)
+  }
   dn = dirname(file)
+  ######################
+  # Allow to read gii.gz
+  ######################
+  file = decompress_gii(file)
   doc = read_xml(file)
   n_data_arrays = xml_attr(doc, "NumberOfDataArrays")
   n_data_arrays = as.numeric(n_data_arrays)

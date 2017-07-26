@@ -12,7 +12,7 @@
 
 <meta name="author" content="Vignette Author" />
 
-<meta name="date" content="2017-05-05" />
+<meta name="date" content="2017-07-26" />
 
 <title>Vignette Title</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Vignette Title</h1>
 <h4 class="author"><em>Vignette Author</em></h4>
-<h4 class="date"><em>2017-05-05</em></h4>
+<h4 class="date"><em>2017-07-26</em></h4>
 
 
 
@@ -80,19 +80,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="getting-the-data" class="section level3">
 <h3>Getting the Data</h3>
 <p>We provide some test data with the package, but must be downloaded using <code>download_gifti_data</code>. We also provide a test function that allows a user to check if the data is downloaded, which is useful for examples or vignettes, such as this one.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gifti)
-<span class="kw">have_gifti_test_data</span>()</code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outdir =<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">library</span>(gifti)
+<span class="kw">have_gifti_test_data</span>(<span class="dt">outdir =</span> outdir)</code></pre></div>
 <p>If this is false, we can combine these to ensure the data is downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">have_gifti_test_data</span>()) {
   <span class="kw">download_gifti_data</span>()
 }</code></pre></div>
-<pre><code>## [1] &quot;/private/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T/RtmplCiQZz/Rinst16df62df15d90/gifti/BV_GIFTI/GzipBase64/sujet01_Lwhite.shape.gii&quot;               
-## [2] &quot;/private/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T/RtmplCiQZz/Rinst16df62df15d90/gifti/BV_GIFTI/GzipBase64/fmri_sujet01_Lwhite_projection.time.gii&quot;
-## [3] &quot;/private/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T/RtmplCiQZz/Rinst16df62df15d90/gifti/BV_GIFTI/GzipBase64/sujet01_Lwhite.surf.gii&quot;                
-## [4] &quot;/private/var/folders/1s/wrtqcpxn685_zk570bnx9_rr0000gr/T/RtmplCiQZz/Rinst16df62df15d90/gifti/BV_GIFTI/GzipBase64/sujet01_Lwhite.inflated.surf.gii&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_gifti_test_data</span>()) {
-  gii_files =<span class="st"> </span><span class="kw">download_gifti_data</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">have_gifti_test_data</span>(<span class="dt">outdir =</span> outdir)) {
+  gii_files =<span class="st"> </span><span class="kw">download_gifti_data</span>(<span class="dt">outdir =</span> outdir)
   gii_list =<span class="st"> </span><span class="kw">lapply</span>(gii_files, readgii)
   surf_files =<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;white[.]surf[.]gii&quot;</span>, gii_files, <span class="dt">value =</span> <span class="ot">TRUE</span>)
   surfs =<span class="st"> </span><span class="kw">lapply</span>(surf_files, surf_triangles)
@@ -125,7 +121,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
