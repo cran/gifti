@@ -1,7 +1,7 @@
 Package: gifti
 Type: Package
 Title: Reads in 'Neuroimaging' 'GIFTI' Files with Geometry Information
-Version: 0.7.4
+Version: 0.7.5
 Author: John Muschelli
 Maintainer: John Muschelli <muschellij2@gmail.com>
 Description: Functions to read in the geometry format under the 
@@ -17,6 +17,6 @@ LazyData: true
 RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-07-26 19:59:42 UTC; johnmuschelli
+Packaged: 2018-02-01 20:12:33 UTC; johnmuschelli
 Repository: CRAN
-Date/Publication: 2017-07-26 22:02:32 UTC
+Date/Publication: 2018-02-01 22:21:05 UTC
