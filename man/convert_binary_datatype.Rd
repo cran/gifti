@@ -4,8 +4,10 @@
 \alias{convert_binary_datatype}
 \title{Convert Binary Data Type}
 \usage{
-convert_binary_datatype(datatype = c("NIFTI_TYPE_UINT8", "NIFTI_TYPE_INT32",
-  "NIFTI_TYPE_UINT32", "NIFTI_TYPE_FLOAT32"))
+convert_binary_datatype(
+  datatype = c("NIFTI_TYPE_UINT8", "NIFTI_TYPE_INT32", "NIFTI_TYPE_UINT32",
+    "NIFTI_TYPE_FLOAT32")
+)
 }
 \arguments{
 \item{datatype}{data type from GIFTI image}
@@ -17,4 +19,9 @@ List of length 2: with elements of size and what
 Converts a data type to the size and \code{what} for
 \code{\link{readBin}}, necessary for \code{Base64Binary} and
 \code{GZipBase64Binary} formats
+}
+\examples{
+convert_binary_datatype()
+convert_binary_datatype('NIFTI_TYPE_INT32')
+testthat::expect_error(convert_binary_datatype('NIFTI_TYPE_BLAH'))
 }
